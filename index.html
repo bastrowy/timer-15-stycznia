@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Do 15 stycznia</title>
+<style>
+  html,body{height:100%;margin:0}
+  body{display:grid;place-items:center;background:#111;color:#fff;font-family:Arial,sans-serif}
+  .timer{text-align:center}
+  .title{font-size:clamp(28px,5vw,56px);margin-bottom:24px}
+  .count{font-size:clamp(42px,9vw,100px);font-weight:700;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="timer">
+  <div class="title">Do 15 stycznia</div>
+  <div class="count" id="count">-- dni --:--:--</div>
+</div>
+<script>
+const target = new Date("2027-01-15T00:00:00+01:00").getTime();
+function update(){
+  const diff = Math.max(0, target - Date.now());
+  const s = Math.floor(diff/1000);
+  const days = Math.floor(s/86400);
+  const hours = Math.floor((s%86400)/3600);
+  const mins = Math.floor((s%3600)/60);
+  const secs = s%60;
+  document.getElementById("count").textContent =
+    `${days} dni ${String(hours).padStart(2,"0")}:${String(mins).padStart(2,"0")}:${String(secs).padStart(2,"0")}`;
+}
+update(); setInterval(update,1000);
+</script>
+</body>
+</html>
